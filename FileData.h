@@ -18,5 +18,7 @@ public:
     vector<Student> readData();
     void writeData();
     void setStudentVector(std::vector<Student> students);
+    int getStudentsNum(){return num_students;}
+    void setStudentsNum(int num){this->num_students = num;}
 };
 #endif //DS_ASSIGMENT3_FILEDATA_H
