@@ -13,17 +13,14 @@ private:
     float gpa;
 public:
     Student(int id, string name, float gpa, string department);
-
     int getID();
     string getName();
     string getDepartment();
     float getGPA();
-
     void setID(int id);
     void setName(string name);
     void setDepartment(string department);
     void setGPA(float gpa);
-
     bool operator<(Student& other);
     bool operator>(Student& other);
     bool operator==(Student& other) ;
