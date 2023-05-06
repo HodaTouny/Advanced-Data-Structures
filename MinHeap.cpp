@@ -76,7 +76,7 @@ int main() {
         cin>>choice; cout<<"\n";
         if(choice == 1){
             cout<<"Enter Student ID : "; cin>>id;cout<<"\n";
-            cout<<"Enter Student Name : "; cin>>name;cout<<"\n";
+            cout<<"Enter Student Name : "; getline(cin, name);cout<<"\n";
             cout<<"Enter Student GPA : "; cin>>gpa;cout<<"\n";
             cout<<"Enter Student Department : ";cin>>department;cout<<"\n";
             Student stud = Student(id,name,gpa,department);
