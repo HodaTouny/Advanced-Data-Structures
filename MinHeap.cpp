@@ -72,15 +72,26 @@ int main() {
     int id=0; float gpa = 0;string name="",department="";
     bool isvalid = true;
     do{
-        cout<<"1 : Add Student\n2 : Print All Students Sorted By GPA\n3 : exit";
+        cout << "What would you like to do?\n";
+        cout << "1. Add Student\n";
+        cout << "2. Print All Students Sorted By GPA\n";
+        cout << "3. Exit\n";
+        cout << "Enter your choice (1-3): ";
         cin>>choice; cout<<"\n";
         if(choice == 1){
-            cout<<"Enter Student ID : "; cin>>id;cout<<"\n";
-            cout<<"Enter Student Name : "; getline(cin, name);cout<<"\n";
-            cout<<"Enter Student GPA : "; cin>>gpa;cout<<"\n";
-            cout<<"Enter Student Department : ";cin>>department;cout<<"\n";
+            cout << "Enter Student ID  : ";
+            cin >> id;cout<<"\n";
+            cout << "Enter Student Name  : ";
+            cin.ignore();
+            getline(cin, name);cout<<"\n";
+            cout << "Enter Student GPA  : ";
+            cin >> gpa;cout<<"\n";
+            cout << "Enter Student Department  : ";
+            cin.ignore();
+            getline(cin, department);cout<<"\n";
             Student stud = Student(id,name,gpa,department);
             heap.addStudent(stud);
+            cout << "Student added successfully!\n";
         }else if(choice==2){
             heap.printAllStudents();
         }else if(choice == 3){
