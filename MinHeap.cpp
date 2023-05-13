@@ -54,54 +54,79 @@ class minHeap{
             }
         }
 
-        void addStudent(Student stud){
+        void addStudent(Student stud) {
             heap.push_back(stud);
             size++;
             heapify();
             Data.setStudentsNum(size);
             Data.setStudentVector(heap);
-            Data.writeData();
+
+        }
+        bool isStudentExist(int id) {
+            for (int i = 0; i <heap.size(); i++) {
+                if (heap[i].getID() == id) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    Student studentData(){
+        int id;
+        float gpa;
+        string name , department;
+
+        while (true) {
+            cout << "Enter Student ID  : ";
+            cin >> id;
+            cout << "\n";
+
+            if (isStudentExist(id)) {
+                cout << "ID already exists. Please enter a different ID.\n";
+                continue;
+            }
+
+            cout << "Enter Student Name  : ";
+            cin.ignore();
+            getline(cin, name);
+            cout << "\n";
+            cout << "Enter Student GPA  : ";
+            cin >> gpa;
+            cout << "\n";
+            cout << "Enter Student Department  : ";
+            cin.ignore();
+            getline(cin, department);
+            cout << "\n";
+
+            Student stud = Student(id, name, gpa, department);
+            return stud;
+        }
+    }
+
+        void Heap(){
+            minHeap heap;
+            int choice = 0;
+            bool isvalid = true;
+            do{
+                cout << "What would you like to do?\n";
+                cout << "1. Add Student\n";
+                cout << "2. Print All Students Sorted By GPA\n";
+                cout << "3. Exit\n";
+                cout << "Enter your choice (1-3): ";
+                cin>>choice; cout<<"\n";
+                if(choice == 1){
+                    Student stud = studentData();
+                    heap.addStudent(stud);
+                    cout << "Student added successfully!\n";
+                }else if(choice==2){
+                    heap.printAllStudents();
+                }else if(choice == 3){
+                    return;
+                }
+                else{
+                    isvalid = false;
+                }
+
+            } while (isvalid);
         }
 
 };
-
-
-int main() {
-    minHeap heap;
-    int choice = 0;
-    int id=0; float gpa = 0;string name="",department="";
-    bool isvalid = true;
-    do{
-        cout << "What would you like to do?\n";
-        cout << "1. Add Student\n";
-        cout << "2. Print All Students Sorted By GPA\n";
-        cout << "3. Exit\n";
-        cout << "Enter your choice (1-3): ";
-        cin>>choice; cout<<"\n";
-        if(choice == 1){
-            cout << "Enter Student ID  : ";
-            cin >> id;cout<<"\n";
-            cout << "Enter Student Name  : ";
-            cin.ignore();
-            getline(cin, name);cout<<"\n";
-            cout << "Enter Student GPA  : ";
-            cin >> gpa;cout<<"\n";
-            cout << "Enter Student Department  : ";
-            cin.ignore();
-            getline(cin, department);cout<<"\n";
-            Student stud = Student(id,name,gpa,department);
-            heap.addStudent(stud);
-            cout << "Student added successfully!\n";
-        }else if(choice==2){
-            heap.printAllStudents();
-        }else if(choice == 3){
-            return 0;
-        }
-        else{
-            isvalid = false;
-        }
-
-    } while (isvalid);
-
-    return 0;
-}
