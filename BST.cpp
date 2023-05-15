@@ -2,12 +2,12 @@
 #include "FileData.h"
 #include "Student.h"
 using namespace std;
-class Node {
+class BSTNode {
 public:
     Student student;
-    Node* left;
-    Node* right;
-    Node(const Student& student) {
+    BSTNode* left;
+    BSTNode* right;
+    BSTNode(const Student& student) {
         this->student=student;
         left=NULL;
         right= NULL;
@@ -15,10 +15,10 @@ public:
 };
 class BinarySearchTree {
 private:
-    Node *root;
-    Node *addStudent(Node *root, Student student) {
+    BSTNode *root;
+    BSTNode *addStudent(BSTNode *root, Student student) {
         if (root == nullptr) {
-            return new Node(student);
+            return new BSTNode(student);
         }
         if (student < root->student) {
             root->left = addStudent(root->left, student);
@@ -29,7 +29,7 @@ private:
         return root;
     }
 
-    Node *removeStudent(Node *root, int id) {
+    BSTNode *removeStudent(BSTNode *root, int id) {
         if (root == nullptr) {
             return nullptr;
         }
@@ -41,12 +41,12 @@ private:
         }
         else{
             if (root->right == nullptr) {
-                Node *temp = root->left;
+                BSTNode *temp = root->left;
                 delete root;
                 return temp;
             }
             else {
-                Node *temp = root->right;
+                BSTNode *temp = root->right;
                 delete root;
                 return temp;
             }
@@ -55,7 +55,7 @@ private:
         return root;
     }
 
-    Node *searchStudent(Node *root, int id) {
+    BSTNode *searchStudent(BSTNode *root, int id) {
         if (root == nullptr || root->student.getID() == id) {
             return root;
         }
@@ -67,7 +67,7 @@ private:
         }
     }
 
-    void printAll(Node *root) {
+    void printAll(BSTNode *root) {
         if (root != nullptr) {
             printAll(root->left);
             cout << root->student.getID() << ", " << root->student.getName() << ", " << root->student.getGPA() << ", "
@@ -76,7 +76,7 @@ private:
         }
     }
 
-    void countStudentsPerDepartment(Node *root, map<string, int> &departmentCounts) {
+    void countStudentsPerDepartment(BSTNode *root, map<string, int> &departmentCounts) {
         if (root != nullptr) {
             countStudentsPerDepartment(root->left, departmentCounts);
             departmentCounts[root->student.getDepartment()]++;
@@ -93,7 +93,7 @@ public:
     }
 
     void removeStudent(int id) {
-        Node *result = searchStudent(root, id);
+        BSTNode *result = searchStudent(root, id);
         if (result != nullptr) {
             root = removeStudent(root, id);
         } else {
@@ -102,7 +102,7 @@ public:
     }
 
     void searchStudent(int id) {
-        Node *result = searchStudent(root, id);
+        BSTNode *result = searchStudent(root, id);
         if (result != nullptr) {
             cout << "[" << result->student.getID() << ", " << result->student.getName() << ", "
                  << result->student.getGPA() << ", " << result->student.getDepartment() << "]" << endl;

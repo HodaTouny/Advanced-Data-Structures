@@ -19,7 +19,7 @@ int main() {
 
     int choice;
     do {
-        cout << "((First Menu - Main menu))" << endl;
+        cout << "((Main menu))" << endl;
         cout << "Choose Data Structure:" << endl;
         cout << "1. BST" << endl;
         cout << "2. AVL" << endl;
@@ -34,7 +34,7 @@ int main() {
             case 1:
                 int subChoice;
                 do {
-                    cout << "((Second Menu - BST))" << endl;
+                    cout << "((BST Menu))" << endl;
                     cout << "Choose one of the following options:" << endl;
                     cout << "1. Add student" << endl;
                     cout << "2. Remove student" << endl;
@@ -49,7 +49,6 @@ int main() {
                             int id;
                             string name, department;
                             float gpa;
-
                             cout << " Enter student ID: ";
                             cin >> id;
                             cin.ignore();
@@ -81,8 +80,7 @@ int main() {
                             bst.addStudent(student);
                             students.push_back(student);
                             fileData.setStudentVector(students);
-                            fileData.writeData();
-                            cout << "Student added." << endl;
+                            cout << "Student added" << endl;
                             break;
                         }
                         case 2: {
@@ -93,12 +91,11 @@ int main() {
                             for (auto it = students.begin(); it != students.end(); ++it) {
                                 if (it->getID() == id) {
                                     students.erase(it);
-                                    cout << "Student removed." << endl;
+                                    cout << "Student removed" << endl;
                                     break;
                                 }
                             }
                             fileData.setStudentVector(students);
-                            fileData.writeData();
                             break;
                         }
 
@@ -107,16 +104,13 @@ int main() {
 
                             cout << "Enter student ID to search: ";
                             cin >> id;
-
                             bst.searchStudent(id);
-
                             break;
                         }
                         case 4: {
-                            cout << "Printing all students (sorted by ID):" << endl;
+                            cout << "all students sorted by ID:" << endl;
                             bst.printAll();
-
-                            cout << "Printing students per department:" << endl;
+                            cout << "students per department:" << endl;
                             bst.countStudentsPerDepartment();
 
                             break;
@@ -124,7 +118,7 @@ int main() {
                         case 5:
                             break;
                         default:
-                            cout << "Invalid choice. Please try again." << endl;
+                            cout << "Invalid choice Please try again" << endl;
                     }
                 } while (subChoice != 5);
 
@@ -132,7 +126,7 @@ int main() {
             case 2: {
                 int subChoice;
                 do {
-                    cout << "((Second Menu - BST))" << endl;
+                    cout << "((AVL menu))" << endl;
                     cout << "Choose one of the following options:" << endl;
                     cout << "1. Add student" << endl;
                     cout << "2. Remove student" << endl;
@@ -179,8 +173,7 @@ int main() {
                             avl.addStudent(student);
                             students.push_back(student);
                             fileData.setStudentVector(students);
-                            fileData.writeData();
-                            cout << "Student added." << endl;
+                            cout << "Student added" << endl;
                             break;
                         }
                         case 2: {
@@ -191,12 +184,12 @@ int main() {
                             for (auto it = students.begin(); it != students.end(); ++it) {
                                 if (it->getID() == id) {
                                     students.erase(it);
-                                    cout << "Student removed." << endl;
+                                    cout << "Student removed" << endl;
                                     break;
                                 }
                             }
                             fileData.setStudentVector(students);
-                            fileData.writeData();
+
                             break;
                         }
 
@@ -211,10 +204,10 @@ int main() {
                             break;
                         }
                         case 4: {
-                            cout << "Printing all students (sorted by ID):" << endl;
+                            cout << "Print all students sorted by ID:" << endl;
                             avl.printAll();
 
-                            cout << "Printing students per department:" << endl;
+                            cout << "students per department:" << endl;
                             avl.countStudentsPerDepartment();
 
                             break;
@@ -222,7 +215,7 @@ int main() {
                         case 5:
                             break;
                         default:
-                            cout << "Invalid choice. Please try again." << endl;
+                            cout << "Invalid choice Please try again." << endl;
                     }
                 } while (subChoice != 5);
 
@@ -238,7 +231,7 @@ int main() {
                 cout << "Exiting program..." << endl;
                 break;
             default:
-                cout << "Invalid choice. Please try again." << endl;
+                cout << "Invalid choice Please try again." << endl;
         }
     } while (choice != 5);
 
