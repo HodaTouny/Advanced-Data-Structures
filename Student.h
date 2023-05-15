@@ -13,7 +13,7 @@ private:
     float gpa;
 public:
     Student(int id, string name, float gpa, string department);
-
+    Student();
     int getID();
     string getName();
     string getDepartment();

@@ -6,7 +6,12 @@ Student::Student(int id, string name, float gpa, string department){
     this->gpa = gpa;
     this->department = department;
 }
-
+Student::Student(){
+    id = 0;
+    name = "";
+    gpa = 0;
+    department = "";
+}
 int Student::getID() {
     return id;
 }

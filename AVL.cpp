@@ -3,13 +3,13 @@
 #include "Student.h"
 using namespace std;
 
-class Node {
+class AVLNode {
 public:
     Student student;
-    Node* left;
-    Node* right;
+    AVLNode* left;
+    AVLNode* right;
     int height;
-    Node(Student student) {
+    AVLNode(Student student) {
         this->student = student;
         left = NULL;
         right = NULL;
@@ -19,8 +19,8 @@ public:
 
 class AVL {
 private:
-    Node* root;
-    int height(Node* root){
+    AVLNode* root;
+    int height(AVLNode* root){
         if (root == NULL) {
             return 0;
         }
@@ -29,33 +29,33 @@ private:
     int max(int a, int b){
         return (a > b) ? a : b;
     }
-    int getBalance(Node* root){
+    int getBalance(AVLNode* root){
         if (root == NULL) {
             return 0;
         }
         return height(root->left) - height(root->right);
     }
-    Node* rightRotate(Node* root){
-        Node* left = root->left;
-        Node* leftRight = left->right;
+    AVLNode* rightRotate(AVLNode* root){
+        AVLNode* left = root->left;
+        AVLNode* leftRight = left->right;
         left->right = root;
         root->left = leftRight;
         root->height = max(height(root->left), height(root->right)) + 1;
         left->height = max(height(left->left), height(left->right)) + 1;
         return left;
     }
-    Node* leftRotate(Node* root){
-        Node* right = root->right;
-        Node* rightLeft = right->left;
+    AVLNode* leftRotate(AVLNode* root){
+        AVLNode* right = root->right;
+        AVLNode* rightLeft = right->left;
         right->left = root;
         root->right = rightLeft;
         root->height = max(height(root->left), height(root->right)) + 1;
         right->height = max(height(right->left), height(right->right)) + 1;
         return right;
     }
-    Node* addStudent(Node* root, Student student){
+    AVLNode* addStudent(AVLNode* root, Student student){
         if (root == NULL) {
-            return new Node(student);
+            return new AVLNode(student);
         }
         if (student < root->student) {
             root->left = addStudent(root->left, student);
@@ -86,7 +86,7 @@ private:
         return root;
     }
 
-    Node* removeStudent(Node* root, int id){
+    AVLNode* removeStudent(AVLNode* root, int id){
         //if student id is less than root id, remove from left subtree
         if (id < root->student.getID()) {
             root->left = removeStudent(root->left, id);
@@ -96,7 +96,7 @@ private:
         }
         else {
             if (root->left == NULL || root->right == NULL) {
-                Node* temp = root->left ? root->left : root->right;
+                AVLNode* temp = root->left ? root->left : root->right;
                 if (temp == NULL) {
                     temp = root;
                     root = NULL;
@@ -107,7 +107,7 @@ private:
                 delete temp;
             }
             else {
-                Node* temp = root->right;
+                AVLNode* temp = root->right;
                 while (temp->left != NULL) {
                     temp = temp->left;
                 }
@@ -137,7 +137,7 @@ private:
         }
         return root;
     }
-    Node* searchStudent(Node* root, int id){
+    AVLNode* searchStudent(AVLNode* root, int id){
         if (root == NULL || root->student.getID() == id) {
             return root;
         }
@@ -146,7 +146,7 @@ private:
         }
         return searchStudent(root->right, id);
     }
-    void printAll(Node* root){
+    void printAll(AVLNode* root){
         if (root != NULL) {
             printAll(root->left);
             cout << root->student.getID() << ", " << root->student.getName() << ", " << root->student.getGPA() << ", "
@@ -154,7 +154,7 @@ private:
             printAll(root->right);
         }
     }
-    void countStudentsPerDepartment(Node* root, map<string, int>& departmentCounts){
+    void countStudentsPerDepartment(AVLNode* root, map<string, int>& departmentCounts){
         if (root != NULL) {
             countStudentsPerDepartment(root->left, departmentCounts);
             departmentCounts[root->student.getDepartment()]++;
@@ -171,7 +171,7 @@ public:
     }
 
     void removeStudent(int id) {
-        Node *result = searchStudent(root, id);
+        AVLNode *result = searchStudent(root, id);
         if (result != nullptr) {
             root = removeStudent(root, id);
         } else {
@@ -180,7 +180,7 @@ public:
     }
 
     void searchStudent(int id) {
-        Node *result = searchStudent(root, id);
+        AVLNode *result = searchStudent(root, id);
         if (result != nullptr) {
             cout << "[" << result->student.getID() << ", " << result->student.getName() << ", "
                  << result->student.getGPA() << ", " << result->student.getDepartment() << "]" << endl;
